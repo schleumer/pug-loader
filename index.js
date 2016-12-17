@@ -133,7 +133,7 @@ module.exports = function(source) {
 	run();
 	function run() {
 		try {
-			var tmplFunc = pug.compileClient(source, {
+			var tmplFunc = pug.compileClient(source, Object.assign({}, query, {
 				filename: req,
 				doctype: query.doctype || "html",
 				pretty: query.pretty,
@@ -145,7 +145,7 @@ module.exports = function(source) {
 				plugins: [
 					plugin
 				].concat(query.plugins || [])
-			});
+			}));
 		} catch(e) {
 			if(missingFileMode) {
 				// Ignore, it'll continue after async action
